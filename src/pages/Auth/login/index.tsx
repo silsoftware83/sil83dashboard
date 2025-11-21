@@ -1,147 +1,168 @@
-import React, { useState } from 'react';
-import { Eye, EyeOff, Mail, Lock, Users } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail } from "lucide-react";
+import { useLogin } from "./hooks/useLogin";
 
-export default function FluentLogin() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('alexisduarte1512@gmail.com');
-  const [password, setPassword] = useState('');
-  const [isFocusedEmail, setIsFocusedEmail] = useState(false);
-  const [isFocusedPassword, setIsFocusedPassword] = useState(false);
+const LoginScreen = () => {
+  const {
+    showPassword,
+    setShowPassword,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    rememberMe,
+    setRememberMe,
+    handleSubmit,
+  } = useLogin();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden flex">
-        {/* Left Panel */}
-        <div className="w-1/2 bg-gradient-to-br from-blue-600 to-purple-600 p-12 flex flex-col justify-between text-white">
-          <div>
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                <Users className="w-7 h-7 text-blue-600" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold">NOTARÍA</h1>
-                <p className="text-sm opacity-90">PÚBLICA 83</p>
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-200 flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        {/* Card principal */}
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+          {/* Header con gradiente sutil */}
+          <div className="bg-linear-to-r from-blue-800 to-purple-700 px-8 py-10">
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                <Lock className="w-8 h-8 text-white" />
               </div>
             </div>
-            
-            <div className="mt-16">
-              <h2 className="text-3xl font-semibold mb-4">Sistema Integral Laboral</h2>
-              <p className="text-lg opacity-90">Sistema de gestión empresarial</p>
-            </div>
+            <h1 className="text-2xl font-semibold text-white text-center">
+              Bienvenido
+            </h1>
+            <p className="text-slate-300 text-center mt-2 text-sm">
+              Inicia sesión en tu cuenta
+            </p>
           </div>
 
-          <div className="space-y-3 text-sm opacity-75">
-            <div className="flex items-center gap-2">
-              <div className="w-1 h-1 bg-white rounded-full"></div>
-              <p>Gestión de recursos humanos</p>
+          {/* Formulario */}
+          <div className="px-8 py-8">
+            <div className="space-y-5">
+              {/* Campo de email */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-slate-700 mb-2"
+                >
+                  Correo electrónico
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Mail className="h-5 w-5 text-slate-400" />
+                  </div>
+                  <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all outline-none bg-slate-50 hover:bg-white"
+                    placeholder="usuario@empresa.com"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Campo de contraseña */}
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-slate-700 mb-2"
+                >
+                  Contraseña
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Lock className="h-5 w-5 text-slate-400" />
+                  </div>
+                  <input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="block w-full pl-10 pr-10 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all outline-none bg-slate-50 hover:bg-white"
+                    placeholder="••••••••"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-5 w-5 text-slate-400 hover:text-slate-600" />
+                    ) : (
+                      <Eye className="h-5 w-5 text-slate-400 hover:text-slate-600" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Recordarme y olvidé contraseña */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    id="remember-me"
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className="h-4 w-4 text-slate-600 border-slate-300 rounded focus:ring-slate-500"
+                  />
+                  <label
+                    htmlFor="remember-me"
+                    className="ml-2 block text-sm text-slate-700"
+                  >
+                    Recordarme
+                  </label>
+                </div>
+                <button
+                  type="button"
+                  className="text-sm text-slate-600 hover:text-slate-800 font-medium transition-colors"
+                >
+                  ¿Olvidaste tu contraseña?
+                </button>
+              </div>
+
+              {/* Botón de submit */}
+              <button
+                type="button"
+                onClick={handleSubmit}
+                className="w-full bg-linear-to-r from-blue-700 to-blue-800 text-white py-2.5 px-4 rounded-lg font-medium hover:from-blue-800 hover:to-blue-900 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition-all shadow-md hover:shadow-lg"
+              >
+                Iniciar sesión
+              </button>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-1 h-1 bg-white rounded-full"></div>
-              <p>Control de asistencia</p>
+
+            {/* Divider */}
+            <div className="mt-6 relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-slate-200"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-4 bg-white text-slate-500">
+                  ¿Necesitas ayuda?
+                </span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-1 h-1 bg-white rounded-full"></div>
-              <p>Nómina integrada</p>
+
+            {/* Link de soporte */}
+            <div className="mt-6 text-center">
+              <button
+                type="button"
+                className="text-sm text-slate-600 hover:text-slate-800 transition-colors"
+                
+              >
+                Contactar con soporte técnico
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Right Panel - Login Form */}
-        <div className="w-1/2 p-12 flex flex-col justify-center">
-          <div className="mb-8">
-            <h2 className="text-3xl font-semibold text-gray-900 mb-2">Bienvenido</h2>
-            <p className="text-gray-600">Inicia sesión en tu cuenta</p>
-          </div>
-
-          <form className="space-y-6">
-            {/* Email Input */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Correo electrónico
-              </label>
-              <div className={`relative transition-all duration-200 ${
-                isFocusedEmail 
-                  ? 'ring-2 ring-blue-500 rounded-lg' 
-                  : 'ring-1 ring-gray-300 rounded-lg'
-              }`}>
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onFocus={() => setIsFocusedEmail(true)}
-                  onBlur={() => setIsFocusedEmail(false)}
-                  className="w-full pl-12 pr-4 py-3.5 text-gray-900 bg-transparent focus:outline-none"
-                  placeholder="usuario@ejemplo.com"
-                />
-              </div>
-            </div>
-
-            {/* Password Input */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Contraseña
-              </label>
-              <div className={`relative transition-all duration-200 ${
-                isFocusedPassword 
-                  ? 'ring-2 ring-blue-500 rounded-lg' 
-                  : 'ring-1 ring-gray-300 rounded-lg'
-              }`}>
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-                  <Lock className="w-5 h-5" />
-                </div>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onFocus={() => setIsFocusedPassword(true)}
-                  onBlur={() => setIsFocusedPassword(false)}
-                  className="w-full pl-12 pr-12 py-3.5 text-gray-900 bg-transparent focus:outline-none"
-                  placeholder="Ingresa tu contraseña"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                </button>
-              </div>
-            </div>
-
-            {/* Remember & Forgot */}
-            <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-2 focus:ring-blue-500" />
-                <span className="text-sm text-gray-700">Recordarme</span>
-              </label>
-              <a href="#" className="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                ¿Olvidaste tu contraseña?
-              </a>
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-lg transition-all duration-200 shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40"
-            >
-              Iniciar Sesión
-            </button>
-
-            {/* Help Link */}
-            <div className="text-center pt-4">
-              <p className="text-sm text-gray-600">
-                ¿Necesitas ayuda?{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
-                  Contacta a RH
-                </a>
-              </p>
-            </div>
-          </form>
+        {/* Footer */}
+        <div className="mt-6 text-center text-sm text-slate-500">
+          <p>© 2025 Tu Empresa. Todos los derechos reservados.</p>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default LoginScreen;
