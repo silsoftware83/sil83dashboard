@@ -15,7 +15,7 @@
 // class Request {
 //   async get(url: string, data?: any): Promise<{ result?: any; statusCode?: number,message?:any }> {
 //     let token = "";
-//     const tkn = sessionStorage.getItem("authToken");
+//     const tkn = sessionStorage.getItem("auth_token");
 //     if (tkn) {
 //       token = decryptString(tkn);
 //     }
@@ -67,7 +67,7 @@
 
 //   async post(url: string, data: object): Promise<{ result?: any; statusCode: number,message?:any }> {
 //     let token = "";
-//     const tkn = sessionStorage.getItem("authToken");
+//     const tkn = sessionStorage.getItem("auth_token");
 //     if (tkn) {
 //       token = decryptString(tkn);
 //     }
@@ -88,7 +88,7 @@
 
 //   async delete(url: string, data?: object): Promise<{ result?: any; statusCode: number,message?:any }> {
 //     let token = "";
-//     const tkn = sessionStorage.getItem("authToken");
+//     const tkn = sessionStorage.getItem("auth_token");
 //     if (tkn) {
 //       token = decryptString(tkn);
 //     }
@@ -109,7 +109,7 @@
 
 //   async put(url: string, data: object): Promise<{ result?: any; statusCode: number,message?:any }> {
 //     let token = "";
-//     const tkn = sessionStorage.getItem("authToken");
+//     const tkn = sessionStorage.getItem("auth_token");
 //     if (tkn) {
 //       token = decryptString(tkn);
 //     }
@@ -130,7 +130,7 @@
 
 //   async patch(url: string, data: object): Promise<{ result?: any; statusCode: number,message?:any }> {
 //     let token = "";
-//     const tkn = sessionStorage.getItem("authToken");
+//     const tkn = sessionStorage.getItem("auth_token");
 //     if (tkn) {
 //       token = decryptString(tkn);
 //     }
@@ -150,7 +150,7 @@
 //   }
 //   async postFiles(url: string, data: object): Promise<{ result?: any; statusCode: number, message?:any }> {
 //     let token = "";
-//     const tkn = sessionStorage.getItem("authToken");
+//     const tkn = sessionStorage.getItem("auth_token");
 //     if (tkn) {
 //       token = decryptString(tkn);
 //     }
@@ -239,7 +239,7 @@ const mensajes = body && body.errors && typeof body.errors === "object"
 
   async get(url: string, data?: any): Promise<{ result?: any; statusCode?: number; message?: any }> {
     let token = "";
-    const tkn = sessionStorage.getItem("authToken");
+    const tkn = sessionStorage.getItem("auth_token");
     if (tkn) {
       token = decryptString(tkn);
     }
@@ -261,7 +261,7 @@ const mensajes = body && body.errors && typeof body.errors === "object"
 
   async post(url: string, data: object): Promise<{ result?: any; statusCode: number; message?: any }> {
     let token = "";
-    const tkn = sessionStorage.getItem("authToken");
+    const tkn = sessionStorage.getItem("auth_token");
     if (tkn) {
       token = decryptString(tkn);
     }
@@ -285,7 +285,7 @@ const mensajes = body && body.errors && typeof body.errors === "object"
 
   async delete(url: string, data?: object): Promise<{ result?: any; statusCode: number; message?: any }> {
     let token = "";
-    const tkn = sessionStorage.getItem("authToken");
+    const tkn = sessionStorage.getItem("auth_token");
     if (tkn) {
       token = decryptString(tkn);
     }
@@ -306,7 +306,7 @@ const mensajes = body && body.errors && typeof body.errors === "object"
 
   async put(url: string, data: object): Promise<{ result?: any; statusCode: number; message?: any }> {
     let token = "";
-    const tkn = sessionStorage.getItem("authToken");
+    const tkn = sessionStorage.getItem("auth_token");
     if (tkn) {
       token = decryptString(tkn);
     }
@@ -327,7 +327,7 @@ const mensajes = body && body.errors && typeof body.errors === "object"
 
   async patch(url: string, data: object): Promise<{ result?: any; statusCode: number; message?: any }> {
     let token = "";
-    const tkn = sessionStorage.getItem("authToken");
+    const tkn = sessionStorage.getItem("auth_token");
     if (tkn) {
       token = decryptString(tkn);
     }
@@ -348,7 +348,7 @@ const mensajes = body && body.errors && typeof body.errors === "object"
 
   async postFiles(url: string, data: object): Promise<{ result?: any; statusCode: number; message?: any }> {
     let token = "";
-    const tkn = sessionStorage.getItem("authToken");
+    const tkn = sessionStorage.getItem("auth_token");
     if (tkn) {
       token = decryptString(tkn);
     }

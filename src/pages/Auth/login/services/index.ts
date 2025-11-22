@@ -14,9 +14,9 @@ export const authService = {
 
       if (response.statusCode === 200 && response.result) {
 
-        localStorage.setItem('auth_token', encryptString(response.result.access_token));
-        localStorage.setItem('user', JSON.stringify(response.result.user));
-        localStorage.setItem('modules', JSON.stringify(response.result.modules));
+        sessionStorage.setItem('auth_token', encryptString(response.result.access_token));
+        sessionStorage.setItem('user', JSON.stringify(response.result.user));
+        sessionStorage.setItem('modules', JSON.stringify(response.result.modules));
         return response.result.user;
       }
     return null
@@ -38,8 +38,8 @@ export const authService = {
           role: 'user',
         };
         
-        localStorage.setItem('auth_token', 'demo_token_' + Math.random());
-        localStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('auth_token', 'demo_token_' + Math.random());
+        sessionStorage.setItem('user', JSON.stringify(user));
         
         resolve(user);
       }, 500);
@@ -47,14 +47,14 @@ export const authService = {
   },
 
   logout: async (): Promise<void> => {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('auth_token');
+    sessionStorage.removeItem('user');
     return Promise.resolve();
   },
 
   getCurrentUser: async (): Promise<User | null> => {
-    const userJson = localStorage.getItem('user');
-    const token = localStorage.getItem('auth_token');
+    const userJson = sessionStorage.getItem('user');
+    const token = sessionStorage.getItem('auth_token');
     
     if (token && userJson) {
       return Promise.resolve(JSON.parse(userJson));

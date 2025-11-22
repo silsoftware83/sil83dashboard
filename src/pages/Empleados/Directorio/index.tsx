@@ -1,11 +1,18 @@
 
 
-import { DataTable } from "../../../components/ui/DataTable";
+import { DataTable, type Column } from "../../../components/ui/DataTable";
 import { useTheme } from "../../../context/ThemeContext";
 import { useEmpleados } from "./hooks/useEmpleados";
+import type { Employee } from "./types";
 
 // Página principal del módulo Directorio
 export default function DirectorioPage() {
+  const columns:Column<Employee>[]=[
+    { key: 'name', header: 'Nombre', sortable: true },
+    { key: 'lastName', header: 'Apellidos', sortable: true },
+    
+    { key: 'email', header: 'Email', sortable: true },
+  ]
   const {darkMode} = useTheme()
   const { personal } = useEmpleados();
   return( 
@@ -27,10 +34,10 @@ export default function DirectorioPage() {
                </div>
        
                <DataTable
-                 data={[]}
-                 columns={[]}
+                 data={personal}
+                 columns={columns}
                  darkMode={darkMode}
-                 itemsPerPage={5}
+                 itemsPerPage={20}
                  searchable={true}
                />
              </div>

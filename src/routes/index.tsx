@@ -8,6 +8,7 @@ import { DashboardLayout } from '../Layouts/DashboardLayout';
 import NotFoundPage from '../pages/NotFoundPage';
 import AdminDashboard from '../pages/home/Admin/AdminDashboard';
 import DirectorioPage from '../pages/Empleados/Directorio';
+import DepartmentsAndPositions from '../pages/Configuracion/Empresa/DepartamentosYPuestos';
 const AppRouter: React.FC = () => {
   return (
      <ThemeProvider>
@@ -24,6 +25,7 @@ const AppRouter: React.FC = () => {
             <Route element={<DashboardLayout />}>
                 <Route path="/home_admin" element={<AdminDashboard />} />
                  <Route path="/empleados/directorio" element={<DirectorioPage />} />
+                 <Route path="/configuracion/empresa/departamentos" element={<DepartmentsAndPositions />} />
             </Route>
 
           </Route>
