@@ -59,8 +59,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   const [expandedSubmodules, setExpandedSubmodules] = useState<{ [key: number]: boolean }>({});
   
   useEffect(() => {
-    // Cargar módulos del localStorage
-    const storedModules = localStorage.getItem('modules');
+    // Cargar módulos del sessionStorage
+    const storedModules = sessionStorage.getItem('modules');
     if (storedModules) {
       try {
         const parsedModules = JSON.parse(storedModules);
